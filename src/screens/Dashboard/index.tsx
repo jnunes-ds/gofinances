@@ -32,9 +32,7 @@ export function Dashboard(){
                 </UserWrapper>
             </Header>
 
-            <HighlightCards
-                horizontal
-            >
+            <HighlightCards>
                 <HighlightCard />
                 <HighlightCard />
                 <HighlightCard />
