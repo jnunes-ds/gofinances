@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { TransactionCard } from '../../Components/TransactionCard/index';
+import { TransactionCard, TransactionCardProps } from '../../Components/TransactionCard/index';
 import { HighlightCard } from '../../Components/HighlightCard/index';
 import { 
     Container,
@@ -19,9 +19,16 @@ import {
  } from './styles'
 import { getBottomSpace } from 'react-native-iphone-x-helper';
 
+export interface DataListProps extends TransactionCardProps{
+    id: string;
+}
+
 export function Dashboard(){
+    
+
     const Data = [
     {
+        id: '1',
         type: 'positive',
         title: "Desenvolvimento de site",
         amount: "R$ 12.000,00",
@@ -32,6 +39,7 @@ export function Dashboard(){
         date: "13/04/2020"
     },
     {
+        id: '2',
         type: 'negative',
         title: "Hamburgeria Pizzy",
         amount: "R$ 59,00",
@@ -42,6 +50,7 @@ export function Dashboard(){
         date: "13/04/2020"
     },
     {
+        id: '3',
         type: 'negative',
         title: "Aluguel do apartamento",
         amount: "R$ 1.200,00",
@@ -52,6 +61,7 @@ export function Dashboard(){
         date: "13/04/2020"
     },
     {
+        id: '4',
         type: 'positive',
         title: "Desenvolvimento de site",
         amount: "R$ 12.000,00",
@@ -105,9 +115,9 @@ export function Dashboard(){
 
                 <TransactionList 
                     data={Data}
+                    keyExtractor={ item => item }
                     renderItem={ ({ item }) => (
                         <TransactionCard 
-                            key={new Date().getDate()} 
                             data={item}
                         />
                     ) }

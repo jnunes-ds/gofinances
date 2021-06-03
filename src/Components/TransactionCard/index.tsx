@@ -16,7 +16,7 @@ import {
     icon: string;
  }
 
- interface DataProps {
+ export interface TransactionCardProps {
     type: 'positive' | 'negative';
     title: string;
     amount: string;
@@ -24,7 +24,7 @@ import {
     date: string;
  }
  interface Props {
-     data: DataProps;
+     data: TransactionCardProps;
  }
 
 export function TransactionCard({ data }: Props){
