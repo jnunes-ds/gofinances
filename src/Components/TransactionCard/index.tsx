@@ -17,6 +17,7 @@ import {
  }
 
  interface DataProps {
+    type: 'positive' | 'negative';
     title: string;
     amount: string;
     category: CategoryProps;
