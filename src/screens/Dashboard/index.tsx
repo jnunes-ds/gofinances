@@ -105,11 +105,12 @@ export function Dashboard(){
 
                 <TransactionList 
                     data={Data}
-                    renderItem={ ({ item }) => <TransactionCard key={new Date().getDate()} data={item}/> }
-                    showsVerticalScrollIndicator={false}
-                    contentContainerStyle={{
-                        paddingBottom: getBottomSpace()
-                    }}
+                    renderItem={ ({ item }) => (
+                        <TransactionCard 
+                            key={new Date().getDate()} 
+                            data={item}
+                        />
+                    ) }
                 />
 
             </Transactions>

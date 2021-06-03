@@ -1,7 +1,7 @@
 import styled from "styled-components/native";
 import { RFPercentage, RFValue } from 'react-native-responsive-fontsize';
 import { Feather } from '@expo/vector-icons';
-import { getStatusBarHeight } from 'react-native-iphone-x-helper';
+import { getStatusBarHeight, getBottomSpace } from 'react-native-iphone-x-helper';
 
 
 export const Container = styled.View`
@@ -91,4 +91,9 @@ export const Title = styled.Text`
     margin-bottom: ${RFValue(16)}px;
 `;
 
-export const TransactionList = styled.FlatList``;
+export const TransactionList = styled.FlatList.attrs({
+    showsVerticalScrollIndicator: false,
+    contentContainerStyle: {
+        paddingBottom: getBottomSpace()
+    }
+})``;
