@@ -1,10 +1,19 @@
 import React from 'react';
-import { Container } from './styles';
+
+import { 
+    Container,
+    Header,
+    Title,
+ } from './styles';
 
 export function Register(){
     return (
         <Container>
-            s
+            <Header>
+                <Title>Cadastro</Title>
+            </Header>
+
+
         </Container>
     );
 }
