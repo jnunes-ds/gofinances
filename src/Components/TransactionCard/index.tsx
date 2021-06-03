@@ -15,32 +15,31 @@ import {
     name: string;
     icon: string;
  }
+
+ interface DataProps {
+    title: string;
+    amount: string;
+    category: CategoryProps;
+    date: string;
+ }
  interface Props {
-     title: string;
-     amount: string;
-     category: CategoryProps;
-     date: string;
+     data: DataProps;
  }
 
-export function TransactionCard({
-    title,
-    amount,
-    category,
-    date
-}: Props){
+export function TransactionCard({ data }: Props){
     return (
         <Container>
-            <Title>{title}</Title>
+            <Title>{data.title}</Title>
 
-            <Amount>{amount}</Amount>
+            <Amount>{data.amount}</Amount>
 
             <Footer>
                 <Category>
                     <Icon name="dollar-sign"/>
-                    <CategoryName>{category.name}</CategoryName>
+                    <CategoryName>{data.category.name}</CategoryName>
                 </Category>
-                
-                <Date>{date}</Date>
+
+                <Date>{data.date}</Date>
             </Footer>
         </Container>
     );
