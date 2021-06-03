@@ -33,7 +33,7 @@ export function TransactionCard({ data }: Props){
             <Title>{data.title}</Title>
 
             <Amount type={data.type} >
-                {data.amount}
+                {data.type === 'negative' && '-'} {data.amount}
             </Amount>
 
             <Footer>
