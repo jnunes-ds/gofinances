@@ -32,7 +32,9 @@ export function TransactionCard({ data }: Props){
         <Container>
             <Title>{data.title}</Title>
 
-            <Amount>{data.amount}</Amount>
+            <Amount type={data.type} >
+                {data.amount}
+            </Amount>
 
             <Footer>
                 <Category>
