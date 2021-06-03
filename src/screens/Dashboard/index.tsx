@@ -37,7 +37,7 @@ export function Dashboard(){
         amount: "R$ 59,00",
         category: {
             name: 'Alimentação',
-            icon: 'dollar-sign'
+            icon: 'coffee'
         },
         date: "13/04/2020"
     },
@@ -47,7 +47,7 @@ export function Dashboard(){
         amount: "R$ 1.200,00",
         category: {
             name: 'Casa',
-            icon: 'dollar-sign'
+            icon: 'shopping-bag'
         },
         date: "13/04/2020"
     },
