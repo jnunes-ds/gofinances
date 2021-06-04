@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { 
     Button,
@@ -17,6 +17,8 @@ import {
 
 
 export function Register(){
+    const [transactionType, setTransactionType] = useState('');
+
     return (
         <Container>
             <Header>
