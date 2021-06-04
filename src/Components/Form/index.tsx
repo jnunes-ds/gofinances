@@ -1,11 +1,11 @@
 import { Input } from './Input';
 import { Button } from './Button';
 import { TransactionTypeButton } from './TransactionTypeButton';
-import { CategorySelect } from './CategorySelect/index';
+import { CategorySelectButton } from './CategorySelectButton';
 
 export { 
     Input, 
     Button, 
     TransactionTypeButton,
-    CategorySelect 
+    CategorySelectButton 
 };
