@@ -66,7 +66,7 @@ export function Register(){
             </Form>
 
             <Modal>
-                <CategorySe lect />  
+                <CategorySelect />  
             </Modal>
 
         </Container>
