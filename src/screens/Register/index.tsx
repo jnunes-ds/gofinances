@@ -11,13 +11,18 @@ import {
     Header,
     Title,
     Form,
-    Fields
+    Fields,
+    TransactionsTypes
  } from './styles';
 
 
 
 export function Register(){
     const [transactionType, setTransactionType] = useState('');
+
+    function handleTransactionTypeSelect(type: 'up' | 'down'){
+        setTransactionType(type);
+    }
 
     return (
         <Container>
@@ -35,7 +40,20 @@ export function Register(){
                         placeholder="Preço"
                     />
 
-                    <TransactionTypeButton />
+                    <TransactionsTypes>
+                        <TransactionTypeButton 
+                            type="up"
+                            title="Income"
+                            onPress={() => handleTransactionTypeSelect('up')}
+                            isActive={transactionType === 'up'}
+                        />
+                        <TransactionTypeButton 
+                            type="down"
+                            title="Outcome"
+                            onPress={() => handleTransactionTypeSelect('down')}
+                            isActive={transactionType === 'down'}
+                        />
+                    </TransactionsTypes>
                 </Fields>
 
                 <Button title="Enviar"/>
