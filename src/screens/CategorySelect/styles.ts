@@ -24,8 +24,32 @@ export const Title = styled.Text`
     color: ${ ({ theme }) => theme.colors.shape };
 `;
 
-export const Category = styled.View``;
+export const Category = styled.View`
+    width: 100%;
+    padding: ${RFValue(15)}px;
 
-export const Icon = styled(Feather)``;
+    flex-direction: row;
+    align-items: center;
+`;
 
-export const Name = styled.Text``;
+export const Icon = styled(Feather)`
+    font-size: ${RFValue(20)}px;
+    margin-right: ${RFValue(16)}px;
+`;
+
+export const Name = styled.Text`
+    font-family: ${ ({ theme }) => theme.fonts.regular };
+    font-size: ${RFValue(14)}px;
+`;
+
+export const Separator = styled.View`
+    height: 1px;
+    width: 100%;
+    background-color: ${ ({ theme }) => theme.colors.text };
+`;
+
+export const Footer = styled.View`
+    width: 100%;
+    padding: 24px;
+`;
+
