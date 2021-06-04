@@ -22,5 +22,5 @@ export const Category = styled.Text`
 
 export const Icon = styled(Feather)`
     font-size: ${RFValue(20)}px;
-    color: ${ ({ theme }) => theme.colors.text }
+    color: ${ ({ theme }) => theme.colors.text };
 `;
