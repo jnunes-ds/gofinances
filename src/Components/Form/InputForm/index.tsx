@@ -5,7 +5,8 @@ import { Input } from '../Input';
 import { Control, Controller } from 'react-hook-form';
 
 import {
-    Container
+    Container,
+    Error
 } from './styles';
 
 interface Props extends TextInputProps{
@@ -31,6 +32,7 @@ export function InputForm({
                 )}
                 name={name}
             />
+            <Error>Erro do campo</Error>
         </Container>
     );
 }
