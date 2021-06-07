@@ -12,11 +12,13 @@ import {
 interface Props extends TextInputProps{
     control: Control;
     name: string;
+    error?: string;
 }
 
 export function InputForm({
     control,
     name,
+    error,
     ...rest
 }: Props){
     return (
@@ -32,7 +34,7 @@ export function InputForm({
                 )}
                 name={name}
             />
-            <Error>Erro do campo</Error>
+            { error && <Error> {error} </Error> }
         </Container>
     );
 }

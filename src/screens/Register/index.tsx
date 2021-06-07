@@ -105,6 +105,7 @@ export function Register(){
                             placeholder="Nome"
                             autoCapitalize="sentences"
                             autoCorrect={false}
+                            error={errors.name && errors.name.message}
                         />
                         
                         <InputForm 
@@ -112,6 +113,7 @@ export function Register(){
                             control={control}
                             placeholder="Preço"
                             keyboardType="numeric"
+                            error={errors.amount && errors.amount.message}
                         />
 
                         <TransactionsTypes>
