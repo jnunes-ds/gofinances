@@ -1,4 +1,5 @@
 import React from 'react';
+import { TouchableWithoutFeedback } from 'react-native';
 import { RectButtonProps } from 'react-native-gesture-handler';
 
 import {
@@ -17,13 +18,16 @@ export function Button({
     ...rest 
 }: Props){
     return (
-        <Container
+        <TouchableWithoutFeedback
             onPress={onPress}
-            { ...rest }
         >
-            <Title>
-                { title }
-            </Title>
-        </Container>
+            <Container
+                { ...rest }
+            >
+                <Title>
+                    { title }
+                </Title>
+            </Container>
+        </TouchableWithoutFeedback>
     );
 }

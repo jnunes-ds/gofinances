@@ -6,11 +6,10 @@ import { yupResolver } from '@hookform/resolvers/yup';
 
 import { 
     Button,
-    Input,
+    InputForm,
     TransactionTypeButton,
     CategorySelectButton
  } from '../../Components/Form';
- import { InputForm } from '../../Components/Form/InputForm';
 
  import { CategorySelect } from '../CategorySelect';
 
@@ -20,7 +19,7 @@ import {
     Title,
     Form,
     Fields,
-    TransactionsTypes
+    TransactionsTypes,
  } from './styles';
 
 
@@ -45,7 +44,7 @@ import {
 
 export function Register(){
     const [transactionType, setTransactionType] = useState('');
-    const [CategoryModalOpen, setCategoryModalOpen] = useState(false);
+    const [categoryModalOpen, setCategoryModalOpen] = useState(false);
 
 
     const [category, setCategory] = useState({
@@ -143,12 +142,12 @@ export function Register(){
                     />
                 </Form>
 
-                <Modal visible={CategoryModalOpen} >
+                <Modal visible={categoryModalOpen} >
                     <CategorySelect 
                         category={category}
                         setCategory={setCategory}
                         closeSelectCategory={handleCloseSelectCategoryModal}
-                    />  
+                    />                
                 </Modal>
 
             </Container>
