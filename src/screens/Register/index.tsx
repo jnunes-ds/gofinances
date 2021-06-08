@@ -80,15 +80,23 @@ export function Register(){
         if(!transactionType) return Alert.alert('Selecione o tipo da transação');
         if(category.key === 'category') return Alert.alert('Selecione a categoria');
 
-        const data = {
+        const newTransaction = [{
             name: form.name,
             amount: form.amount,
             transactionType,
             category: category.key
-        };
+        }];
 
         try{
-            await AscyncStorage.setItem(dataKey, JSON.stringify(data));
+            const data = await AscyncStorage.getItem(dataKey);
+            const currentData = data ? JSON.parse(data!) : [];
+            
+            const dataFormatted = [
+                ...currentData,
+                newTransaction
+            ];
+
+            await AscyncStorage.setItem(dataKey, JSON.stringify(dataFormatted));
             
         }catch(error){
             console.log(error);
