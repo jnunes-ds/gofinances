@@ -80,11 +80,12 @@ export function Register(){
         if(!transactionType) return Alert.alert('Selecione o tipo da transação');
         if(category.key === 'category') return Alert.alert('Selecione a categoria');
 
-        const newTransaction = [{
+        const newTransaction = [{ 
             name: form.name,
             amount: form.amount,
             transactionType,
-            category: category.key
+            category: category.key,
+            date: new Date()
         }];
 
         try{
