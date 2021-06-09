@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Modal, TouchableWithoutFeedback, Keyboard, Alert } from 'react-native';
 import { useForm } from 'react-hook-form';
+
+import uuid from 'uuid';
+
 import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 
@@ -80,7 +83,8 @@ export function Register(){
         if(!transactionType) return Alert.alert('Selecione o tipo da transação');
         if(category.key === 'category') return Alert.alert('Selecione a categoria');
 
-        const newTransaction = [{ 
+        const newTransaction = [{
+            id: String(uuid.v4()), 
             name: form.name,
             amount: form.amount,
             transactionType,
