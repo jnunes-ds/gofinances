@@ -89,18 +89,18 @@ export function Register(){
         if(!transactionType) return Alert.alert('Selecione o tipo da transação');
         if(category.key === 'category') return Alert.alert('Selecione a categoria');
 
-        const newTransaction = [{
+        const newTransaction = {
             id: String(uuid.v4()), 
             name: form.name,
             amount: form.amount,
-            transactionType,
+            type: transactionType,
             category: category.key,
             date: new Date()
-        }];
+        };
 
         try{
             const dataKey = '@gofinance:transactions';
-            
+
             const data = await AscyncStorage.getItem(dataKey);
             const currentData = data ? JSON.parse(data!) : [];
             

@@ -25,28 +25,26 @@ export interface DataListProps extends TransactionCardProps{
 
 export function Dashboard(){
     const [data, setData] = useState<DataListProps[]>([]); 
+    const dataKey = '@gofinance:transactions';
     
     async function loadTransactions(){
-        const dataKey = '@gofinance:transactions';
         const response = await AsyncStorage.getItem(dataKey);
         const transactions = response ? JSON.parse(response) : [];
-
-        const transactionsFormatted: DataListProps[] = transactions
+        console.log(transactions);
+        try{
+            const transactionsFormatted: DataListProps[] =  transactions
             .map((item: DataListProps) => {
-                
                 const amount = Number(item.amount)
                     .toLocaleString('pt-BR', {
                         style: 'currency',
                         currency: 'BRL'
                     });
 
-                const date = new Date(item.date);
-
-                const formattedDate = Intl.DateTimeFormat('pt-BR', {
+                const date = Intl.DateTimeFormat('pt-BR', {
                     day: '2-digit',
                     month: '2-digit',
                     year: '2-digit'
-                }).format(date);
+                }).format(new Date(item.date));
                 
                 
                 return {
@@ -54,15 +52,31 @@ export function Dashboard(){
                     name: item.name,
                     amount,
                     type: item.type,
-                    Category: item.category,
+                    category: item.category,
                     date
-                };
+                } 
             });
+            setData(transactionsFormatted);
+        }catch(error){
+            console.log(error);
+        }
+        
 
+    }
+
+    const removeAll = async () => {
+        try {
+            await AsyncStorage.removeItem(dataKey);
+        } catch(e) {
+            console.log(e);
+        }
+
+        console.log('Done.')
     }
 
     useEffect(() => {
         loadTransactions();
+        // removeAll();
     }, [])
 
     return (
