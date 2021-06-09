@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { TransactionCard, TransactionCardProps } from '../../Components/TransactionCard/index';
 import { HighlightCard } from '../../Components/HighlightCard/index';
@@ -17,9 +18,7 @@ import {
     Transactions,
     Title,
     TransactionList,
- } from './styles'
-import { getBottomSpace } from 'react-native-iphone-x-helper';
-
+ } from './styles';
 export interface DataListProps extends TransactionCardProps{
     id: string;
 }
@@ -27,7 +26,44 @@ export interface DataListProps extends TransactionCardProps{
 export function Dashboard(){
     const [data, setData] = useState<DataListProps[]>([]); 
     
-    
+    async function loadTransactions(){
+        const dataKey = '@gofinance:transactions';
+        const response = await AsyncStorage.getItem(dataKey);
+        const transactions = response ? JSON.parse(response) : [];
+
+        const transactionsFormatted: DataListProps[] = transactions
+            .map((item: DataListProps) => {
+                
+                const amount = Number(item.amount)
+                    .toLocaleString('pt-BR', {
+                        style: 'currency',
+                        currency: 'BRL'
+                    });
+
+                const date = new Date(item.date);
+
+                const formattedDate = Intl.DateTimeFormat('pt-BR', {
+                    day: '2-digit',
+                    month: '2-digit',
+                    year: '2-digit'
+                }).format(date);
+                
+                
+                return {
+                    id: item.id,
+                    name: item.name,
+                    amount,
+                    type: item.type,
+                    Category: item.category,
+                    date
+                };
+            });
+
+    }
+
+    useEffect(() => {
+        loadTransactions();
+    }, [])
 
     return (
         <Container>
