@@ -30,7 +30,7 @@ export function Dashboard(){
     async function loadTransactions(){
         const response = await AsyncStorage.getItem(dataKey);
         const transactions = response ? JSON.parse(response) : [];
-        console.log(transactions);
+        
         try{
             const transactionsFormatted: DataListProps[] =  transactions
             .map((item: DataListProps) => {

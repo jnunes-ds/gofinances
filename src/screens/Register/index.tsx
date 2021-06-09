@@ -89,11 +89,13 @@ export function Register(){
         if(!transactionType) return Alert.alert('Selecione o tipo da transação');
         if(category.key === 'category') return Alert.alert('Selecione a categoria');
 
+        const type = transactionType ==='up' ? 'positive' : 'negative';
+
         const newTransaction = {
             id: String(uuid.v4()), 
             name: form.name,
             amount: form.amount,
-            type: transactionType,
+            type,
             category: category.key,
             date: new Date()
         };
