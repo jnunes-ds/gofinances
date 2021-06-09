@@ -1,13 +1,17 @@
-import React, { useState, useEffect } from 'react';
-import { Modal, TouchableWithoutFeedback, Keyboard, Alert } from 'react-native';
-import { useForm } from 'react-hook-form';
-
-import uuid from 'uuid';
-
+import React, { useState } from 'react';
+import {
+    Modal,
+    TouchableWithoutFeedback,
+    Keyboard,
+    Alert
+} from 'react-native';
 import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
-
 import AscyncStorage from '@react-native-async-storage/async-storage';
+import uuid from 'uuid';
+
+import { useNavigation } from '@react-navigation/native';
+import { useForm } from 'react-hook-form';
 
 import { 
     Button,
@@ -15,8 +19,7 @@ import {
     TransactionTypeButton,
     CategorySelectButton
  } from '../../Components/Form';
-
- import { CategorySelect } from '../CategorySelect';
+import { CategorySelect } from '../CategorySelect';
 
 import { 
     Container,
@@ -58,9 +61,12 @@ export function Register(){
         name: 'Categoria',
     });
 
+    const navigation = useNavigation();
+
     const {
         control,
         handleSubmit,
+        reset,
         formState: { errors }
     } = useForm({
         resolver: yupResolver(schema)
@@ -102,21 +108,21 @@ export function Register(){
             ];
 
             await AscyncStorage.setItem(dataKey, JSON.stringify(dataFormatted));
+
+            reset();
+            setTransactionType('');
+            setCategory({
+                key: 'category',
+                name: 'Categoria',
+            });
+
+            navigation.navigate('Listagem');
             
         }catch(error){
             console.log(error);
             Alert.alert('Não foi possível salvar');
         }
     }
-
-    useEffect(() => {
-        async function loadData(){
-            const data = await AscyncStorage.getItem(dataKey);
-            console.log(JSON.parse(data!));
-        }
-
-        loadData();
-    },[])
 
     return (
         <TouchableWithoutFeedback
