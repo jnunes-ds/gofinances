@@ -122,15 +122,15 @@ export function Dashboard(){
 
     }
 
-    const removeAll = async () => {
-        try {
-            await AsyncStorage.removeItem(dataKey);
-        } catch(e) {
-            console.log(e);
-        }
+    // const removeAll = async () => {
+    //     try {
+    //         await AsyncStorage.removeItem(dataKey);
+    //     } catch(e) {
+    //         console.log(e);
+    //     }
 
-        console.log('Done.')
-    }
+    //     console.log('Done.')
+    // }
 
     useEffect(() => {
         loadTransactions();
