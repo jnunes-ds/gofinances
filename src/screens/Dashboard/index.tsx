@@ -6,9 +6,13 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useFocusEffect } from '@react-navigation/native';
 import { useTheme } from 'styled-components'; 
 
-import { TransactionCard, TransactionCardProps } from '../../Components/TransactionCard/index';
 
-import { HighlightCard } from '../../Components/HighlightCard/index';
+import { 
+    HighlightCard,
+    TransactionCard, 
+    TransactionCardProps 
+} from '../../Components/Cards';
+
 import { 
     Container,
     Header,

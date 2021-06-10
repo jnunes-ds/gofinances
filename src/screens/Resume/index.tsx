@@ -1,10 +1,11 @@
 import React from 'react';
+import { HistoryCard } from '../../Components/Cards';
 
 import {
     Container,
     Header,
     Title
-} from './style';
+} from './styles';
 
 export function Resume(){
     return (
@@ -15,7 +16,7 @@ export function Resume(){
                 </Title>
             </Header>
 
-            
+            <HistoryCard />
         </Container>
     );
 }
