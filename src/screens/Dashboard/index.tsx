@@ -51,26 +51,31 @@ export function Dashboard(){
     const dataKey = '@gofinance:transactions';
 
     const theme = useTheme();
-
-    function getLastTransactionDate(
-        collection : DataListProps[], 
-        type : 'positive' | 'negative'
-    ){
-        const lastTransactions = Math.max.apply(
-                Math, transactions
-                    .filter((transaction) => transaction.type === 'positive')
-                    .map((transaction) => new Date(transaction.date).getTime())
-            );
-
-            return Intl.DateTimeFormat('pt-BR', {
-                day: '2-digit',
-                month: 'long'
-            }).format(new Date(lastTransactions));
-    }
     
     async function loadTransactions(){
         const response = await AsyncStorage.getItem(dataKey);
         const transactions = response ? JSON.parse(response) : [];
+
+
+        const getLastTransactionDate = (
+            collection : DataListProps[], 
+            type : 'positive' | 'negative'
+        ) => {
+            const lastTransactions = Math.max.apply(
+                Math, collection
+                    .filter((transaction) => transaction.type === type)
+                    .map((transaction) => new Date(transaction.date).getTime())
+            );
+
+            const DATE = new Date(lastTransactions)
+            .toLocaleString('pt-BR', {
+                day: '2-digit',
+                month: 'long'
+            })
+
+            return DATE;
+        }
+
 
         let entresTotal = 0;
         let expensiveTotal = 0;
@@ -91,11 +96,12 @@ export function Dashboard(){
                         currency: 'BRL'
                     });
 
-                const date = Intl.DateTimeFormat('pt-BR', {
-                    day: '2-digit',
-                    month: '2-digit',
-                    year: '2-digit'
-                }).format(new Date(item.date));
+                const date = new Date(item.date)
+                    .toLocaleString('pt-BR', {
+                        day: '2-digit',
+                        month: '2-digit',
+                        year: '2-digit'
+                    })
                 
                 
                 return {
