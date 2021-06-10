@@ -88,6 +88,12 @@ export function Dashboard(){
             });
             setTransactions(transactionsFormatted);
 
+            const lastTransactionsEntries = transactions
+                .filter((transaction : DataListProps) => transaction.type === 'positive')
+                .map((transaction : DataListProps) => new Date(transaction.date).getTime());
+            
+                console.log(lastTransactionsEntries);
+
             const total = entresTotal - expensiveTotal;
 
             setHighlightData({
