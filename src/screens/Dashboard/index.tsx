@@ -88,11 +88,20 @@ export function Dashboard(){
             });
             setTransactions(transactionsFormatted);
 
-            const lastTransactionsEntries = transactions
-                .filter((transaction : DataListProps) => transaction.type === 'positive')
-                .map((transaction : DataListProps) => new Date(transaction.date).getTime());
+            const lastTransactionsEntries = Math.max.apply(
+                Math, transactions
+                    .filter((transaction : DataListProps) => transaction.type === 'positive')
+                    .map((transaction : DataListProps) => new Date(transaction.date).getTime())
+            );
+
+            const lastEntriesFormatted = Intl.DateTimeFormat('pt-BR', {
+                day: '2-digit',
+                month: '2-digit',
+                year: '2-digit'
+            }).format(new Date(lastTransactionsEntries));
+                
             
-                console.log(lastTransactionsEntries);
+                console.log(lastEntriesFormatted);
 
             const total = entresTotal - expensiveTotal;
 
