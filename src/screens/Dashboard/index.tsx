@@ -111,6 +111,8 @@ export function Dashboard(){
 
             const lastTransactionEntries = getLastTransactionDate(transactions, 'positive');
             const lastTransactionExpensive = getLastTransactionDate(transactions, 'negative');
+            const lastTransactionTotal = (lastTransactionEntries >= lastTransactionExpensive)
+                ? lastTransactionEntries : lastTransactionExpensive;
 
 
             const total = entresTotal - expensiveTotal;
@@ -138,8 +140,7 @@ export function Dashboard(){
                         style: 'currency',
                         currency: 'BRL'
                     }),
-                    LastTransaction: `Última operação dia ${(lastTransactionEntries >= lastTransactionExpensive)
-                        ? String(lastTransactionEntries) : lastTransactionExpensive}`
+                    LastTransaction: `Última operação dia ${lastTransactionTotal}`
                 }
             });
 
