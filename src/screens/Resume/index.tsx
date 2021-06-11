@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { VictoryPie } from 'victory-native';
 import { RFValue } from 'react-native-responsive-fontsize';
-import { addMonths, subMonths } from 'date-fns';
+import { addMonths, subMonths, format } from 'date-fns';
+import { ptBR } from 'date-fns/locale';
 
 import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
 import { useTheme } from 'styled-components';
@@ -135,7 +136,9 @@ export function Resume(){
                         <MonthSelectIcon name="chevron-left"/>
                     </MonthSelectButton>
 
-                    <Month>Junho</Month>
+                    <Month>
+                        { format(selectedDate, 'MMMM, yyyy', { locale: ptBR }) }
+                    </Month>
 
                     <MonthSelectButton
                         onPress={() => handleDateChange('next')}
