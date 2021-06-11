@@ -13,7 +13,8 @@ import {
     Header,
     Title,
     Content,
-    ChartContainer
+    ChartContainer,
+    HistoryCardsList
 } from './styles';
 
 interface TransactionData{
@@ -123,7 +124,8 @@ export function Resume(){
                     y="total"
                 />
             </ChartContainer>
-            {
+            <HistoryCardsList>
+                {
                 totalByCategories.map(item => (
                     <HistoryCard
                         key={item.key} 
@@ -132,7 +134,8 @@ export function Resume(){
                         color={item.color}
                     />
                 ))
-            }
+                }
+            </HistoryCardsList>
             </Content>
         </Container>
     );

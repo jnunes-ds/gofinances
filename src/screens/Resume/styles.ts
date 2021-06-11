@@ -32,3 +32,7 @@ export const ChartContainer = styled.View`
     width: 100%;
     align-items: center;
 `;
+
+export const HistoryCardsList = styled.ScrollView.attrs({
+    showsVerticalScrollIndicator: false
+})``;
