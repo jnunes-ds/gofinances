@@ -5,6 +5,9 @@ import { VictoryPie } from 'victory-native';
 import { HistoryCard } from '../../Components/Cards';
 import { categories } from '../../utils/categories';
 
+import { useTheme } from 'styled-components';
+
+import { RFValue } from 'react-native-responsive-fontsize';
 import {
     Container,
     Header,
@@ -35,6 +38,7 @@ interface CategoryData{
 export function Resume(){
     const [totalByCategories, setTotalByCategories] = useState<CategoryData[]>([] as CategoryData[]);
 
+    const theme = useTheme();
 
     async function loadData() {
         const dataKey = '@gofinance:transactions';
@@ -103,6 +107,18 @@ export function Resume(){
             <ChartContainer>
                 <VictoryPie 
                     data={totalByCategories}
+                    colorScale={
+                        totalByCategories
+                            .map(category => category.color)
+                    }
+                    style={{
+                        labels: { 
+                            fontSize: RFValue(18),
+                            fontWeight: 'bold',
+                            fill: theme.colors.shape
+                         }
+                    }}
+                    labelRadius={50}
                     x="percentFormatted"
                     y="total"
                 />
