@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { VictoryPie } from 'victory-native';
+import { RFValue } from 'react-native-responsive-fontsize';
+import { addMonths } from 'date-fns';
 
 import { HistoryCard } from '../../Components/Cards';
 import { categories } from '../../utils/categories';
