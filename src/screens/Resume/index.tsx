@@ -4,14 +4,10 @@ import { VictoryPie } from 'victory-native';
 import { RFValue } from 'react-native-responsive-fontsize';
 import { addMonths } from 'date-fns';
 
-import { HistoryCard } from '../../Components/Cards';
-import { categories } from '../../utils/categories';
-
+import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
 import { useTheme } from 'styled-components';
 
-
-import { RFValue } from 'react-native-responsive-fontsize';
-
+import { HistoryCard } from '../../Components/Cards';
 
 import {
     Container,
@@ -19,8 +15,12 @@ import {
     Title,
     Content,
     ChartContainer,
+    MonthSelect,
+    MonthSelectButton,
+    MonthSelectIcon,
+    Month,
 } from './styles';
-import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
+import { categories } from '../../utils/categories';
 
 interface TransactionData{
     type: 'positive' | 'negative';
@@ -42,9 +42,20 @@ interface CategoryData{
 
 
 export function Resume(){
+    const [selectedDate, setSelectedDate] = useState<Date>(new Date());
     const [totalByCategories, setTotalByCategories] = useState<CategoryData[]>([] as CategoryData[]);
 
     const theme = useTheme();
+
+    function handleDateChange(action : 'next' | 'prev'){
+        if(action === 'next'){
+            const newDate = addMonths(selectedDate, 1);
+            setSelectedDate(newDate);
+        }else{
+            const newDate = addMonths(selectedDate, -1);
+            setSelectedDate(newDate);
+        }
+    }
 
     async function loadData() {
         const dataKey = '@gofinance:transactions';
@@ -109,6 +120,7 @@ export function Resume(){
                     Resumo por categoria
                 </Title>
             </Header>
+
             <Content
                 showsVerticalScrollIndicator={false}
                 contentContainerStyle={{
@@ -116,25 +128,41 @@ export function Resume(){
                     paddingBottom: useBottomTabBarHeight(),
                 }}
             >
-            <ChartContainer>
-                <VictoryPie 
-                    data={totalByCategories}
-                    colorScale={
-                        totalByCategories
-                            .map(category => category.color)
-                    }
-                    style={{
-                        labels: { 
-                            fontSize: RFValue(18),
-                            fontWeight: 'bold',
-                            fill: theme.colors.shape
-                         }
-                    }}
-                    labelRadius={50}
-                    x="percentFormatted"
-                    y="total"
-                />
-            </ChartContainer>
+                <MonthSelect>
+                    <MonthSelectButton
+                        onPress={() => handleDateChange('prev')}
+                    >
+                        <MonthSelectIcon name="chevron-left"/>
+                    </MonthSelectButton>
+
+                    <Month>Junho</Month>
+
+                    <MonthSelectButton
+                        onPress={() => handleDateChange('next')}
+                    >
+                        <MonthSelectIcon name="chevron-right"/>
+                    </MonthSelectButton>
+                </MonthSelect>
+
+                <ChartContainer>
+                    <VictoryPie 
+                        data={totalByCategories}
+                        colorScale={
+                            totalByCategories
+                                .map(category => category.color)
+                        }
+                        style={{
+                            labels: { 
+                                fontSize: RFValue(18),
+                                fontWeight: 'bold',
+                                fill: theme.colors.shape
+                            }
+                        }}
+                        labelRadius={50}
+                        x="percentFormatted"
+                        y="total"
+                    />
+                </ChartContainer>
                 {
                 totalByCategories.map(item => (
                     <HistoryCard
