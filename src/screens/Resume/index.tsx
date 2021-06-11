@@ -43,6 +43,7 @@ interface CategoryData{
 
 
 export function Resume(){
+    
     const [selectedDate, setSelectedDate] = useState<Date>(new Date());
     const [totalByCategories, setTotalByCategories] = useState<CategoryData[]>([] as CategoryData[]);
 
@@ -64,7 +65,11 @@ export function Resume(){
         const responseFormatted = response ? JSON.parse(response!) : [];
 
         const expensives = responseFormatted
-            .filter((expensive : TransactionData) => expensive.type === 'negative');
+            .filter((expensive : TransactionData) => 
+            expensive.type === 'negative'&& 
+            new Date(expensive.date).getMonth() === selectedDate.getMonth() &&
+            new Date(expensive.date).getFullYear() === selectedDate.getFullYear()
+            );
         
         const expensivesTotal = expensives
         .reduce((
@@ -112,7 +117,7 @@ export function Resume(){
 
     useEffect(() => {
         loadData();
-    }, [])
+    }, [selectedDate])
 
     return (
         <Container>
