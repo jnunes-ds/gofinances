@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { VictoryPie } from 'victory-native';
 
 import { HistoryCard } from '../../Components/Cards';
 import { categories } from '../../utils/categories';
@@ -8,9 +9,9 @@ import {
     Container,
     Header,
     Title,
-    Content
+    Content,
+    ChartContainer
 } from './styles';
-import { number } from 'yargs';
 
 interface TransactionData{
     type: 'positive' | 'negative';
@@ -23,7 +24,8 @@ interface TransactionData{
 interface CategoryData{
     key: string;
     name: string;
-    total: string;
+    total: number;
+    totalFormatted: string;
     color: string;
     percent: number;
     percentFormatted: string;
@@ -42,7 +44,8 @@ export function Resume(){
         const expensives = responseFormatted
             .filter((expensive : TransactionData) => expensive.type === 'negative');
         
-        const expensivesTotal = expensives.reduce((
+        const expensivesTotal = expensives
+        .reduce((
             accumulator : number, 
             expensive : TransactionData
             ) => {
@@ -62,27 +65,26 @@ export function Resume(){
             });
 
             if(categorySum > 0){
-                const total = categorySum
+                const totalFormatted = categorySum
                     .toLocaleString('pt-BR', {
                         style: 'currency',
                         currency: 'BRL'
                     });
 
                     const percent = (categorySum / expensivesTotal * 100);
-                    const percentFormatted = String(percent.toFixed(0));
+                    const percentFormatted = `${percent.toFixed(1)}%`;
 
                 totalByCategory.push({
                     key: category.key,
                     name: category.name,
                     color: category.color,
-                    total,
+                    total: categorySum,
+                    totalFormatted,
                     percent,
                     percentFormatted
                 });
             }
         });
-
-        console.log(totalByCategory)
         setTotalByCategories(totalByCategory);
     }
 
@@ -98,12 +100,19 @@ export function Resume(){
                 </Title>
             </Header>
             <Content>
+            <ChartContainer>
+                <VictoryPie 
+                    data={totalByCategories}
+                    x="percentFormatted"
+                    y="total"
+                />
+            </ChartContainer>
             {
                 totalByCategories.map(item => (
                     <HistoryCard
                         key={item.key} 
                         title={item.name}
-                        amount={item.total}
+                        amount={item.totalFormatted}
                         color={item.color}
                     />
                 ))
