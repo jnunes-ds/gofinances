@@ -7,7 +7,7 @@ import {
 } from 'react-native';
 import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
-import AscyncStorage from '@react-native-async-storage/async-storage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import uuid from 'uuid';
 
 import { useNavigation } from '@react-navigation/native';
@@ -102,7 +102,7 @@ export function Register(){
         try{
             const dataKey = '@gofinance:transactions';
 
-            const data = await AscyncStorage.getItem(dataKey);
+            const data = await AsyncStorage.getItem(dataKey);
             const currentData = data ? JSON.parse(data!) : [];
             
             const dataFormatted = [
@@ -110,7 +110,7 @@ export function Register(){
                 newTransaction
             ];
 
-            await AscyncStorage.setItem(dataKey, JSON.stringify(dataFormatted));
+            await AsyncStorage.setItem(dataKey, JSON.stringify(dataFormatted));
 
             reset();
             setTransactionType('');
