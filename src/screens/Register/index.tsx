@@ -166,7 +166,7 @@ export function Register(){
                                 type="down"
                                 title="Outcome"
                                 onPress={() => handleTransactionTypeSelect('negative')}
-                                isActive={transactionType === 'negatives'}
+                                isActive={transactionType === 'negative'}
                             />
                         </TransactionsTypes>
 
