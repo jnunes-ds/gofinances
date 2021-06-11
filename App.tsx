@@ -1,6 +1,7 @@
 import 'react-native-gesture-handler';
 
 import React from 'react';
+import { StatusBar } from 'react-native';
 import { ThemeProvider } from 'styled-components';
 
 import AppLoading from 'expo-app-loading';
@@ -33,7 +34,14 @@ export default function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <NavigationContainer>    
+      <NavigationContainer>
+        <StatusBar
+          animated={true}
+          showHideTransition="fade"  
+          translucent={true}
+          backgroundColor="transparent"
+          barStyle="light-content"
+        />   
         <AppRoutes />
       </NavigationContainer>
     </ThemeProvider>
