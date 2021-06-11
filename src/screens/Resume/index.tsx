@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { VictoryPie } from 'victory-native';
 import { RFValue } from 'react-native-responsive-fontsize';
-import { addMonths } from 'date-fns';
+import { addMonths, subMonths } from 'date-fns';
 
 import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
 import { useTheme } from 'styled-components';
@@ -52,7 +52,7 @@ export function Resume(){
             const newDate = addMonths(selectedDate, 1);
             setSelectedDate(newDate);
         }else{
-            const newDate = addMonths(selectedDate, -1);
+            const newDate = subMonths(selectedDate, 1);
             setSelectedDate(newDate);
         }
     }
