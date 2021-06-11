@@ -7,15 +7,18 @@ import { categories } from '../../utils/categories';
 
 import { useTheme } from 'styled-components';
 
+
 import { RFValue } from 'react-native-responsive-fontsize';
+
+
 import {
     Container,
     Header,
     Title,
     Content,
     ChartContainer,
-    HistoryCardsList
 } from './styles';
+import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
 
 interface TransactionData{
     type: 'positive' | 'negative';
@@ -104,7 +107,13 @@ export function Resume(){
                     Resumo por categoria
                 </Title>
             </Header>
-            <Content>
+            <Content
+                showsVerticalScrollIndicator={false}
+                contentContainerStyle={{
+                    paddingHorizontal: 24,
+                    paddingBottom: useBottomTabBarHeight(),
+                }}
+            >
             <ChartContainer>
                 <VictoryPie 
                     data={totalByCategories}
@@ -124,7 +133,6 @@ export function Resume(){
                     y="total"
                 />
             </ChartContainer>
-            <HistoryCardsList>
                 {
                 totalByCategories.map(item => (
                     <HistoryCard
@@ -135,7 +143,6 @@ export function Resume(){
                     />
                 ))
                 }
-            </HistoryCardsList>
             </Content>
         </Container>
     );
