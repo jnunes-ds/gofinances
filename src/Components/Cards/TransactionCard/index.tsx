@@ -17,12 +17,16 @@ import {
     icon: string;
  }
 
- export interface TransactionCardProps {
+ export interface TransactionProps {
     type: 'positive' | 'negative';
     name: string;
     amount: string;
-    category: CategoryProps;
+    category: CategoryProps | string;
     date: string;
+ }
+
+ interface TransactionCardProps extends TransactionProps{
+     category: CategoryProps;
  }
  interface Props {
      data: TransactionCardProps;

@@ -25,13 +25,10 @@ import {
 } from './styles';
 import { categories } from '../../utils/categories';
 import { useFocusEffect } from '@react-navigation/native';
+import { TransactionProps } from '../../Components/Cards/TransactionCard/index';
 
-interface TransactionData{
-    type: 'positive' | 'negative';
-    name: string;
-    amount: string;
+interface TransactionData extends TransactionProps{
     category: string;
-    date: string;
 }
 
 interface CategoryData{

@@ -21,6 +21,8 @@ import {
 import theme from './src/global/styles/theme';
 import { AppRoutes } from './src/routes/app.routes';
 
+import { SingIn } from './src/screens/SingIn';
+
 export default function App() {
   const [fontsLoaded] = useFonts({
     Poppins_400Regular,
@@ -42,7 +44,7 @@ export default function App() {
           backgroundColor="transparent"
           barStyle="light-content"
         />   
-        <AppRoutes />
+        <SingIn/>
       </NavigationContainer>
     </ThemeProvider>
   );
