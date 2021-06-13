@@ -5,6 +5,8 @@ import GoogleSvg from '../../assets/google.svg';
 import LogoSvg from '../../assets/logo.svg';
 import { RFValue } from 'react-native-responsive-fontsize';
 
+import { SingInSocialButton } from '../../Components/SingInSocialButton';
+
 import{
     Container,
     Header,
@@ -12,6 +14,7 @@ import{
     Title,
     SingInTitle,
     Footer,
+    FooterWrapper
 } from './styles';
 
 export function SingIn(){
@@ -35,6 +38,16 @@ export function SingIn(){
                 </SingInTitle>
             </Header>
             <Footer>
+                <FooterWrapper>
+                    <SingInSocialButton 
+                        title="Entrar com Google"
+                        svg={GoogleSvg}
+                    />
+                    <SingInSocialButton 
+                        title="Entrar com Apple"
+                        svg={AppleSvg}
+                    />
+                </FooterWrapper>
 
             </Footer>
         </Container>
