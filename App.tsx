@@ -23,6 +23,8 @@ import { AppRoutes } from './src/routes/app.routes';
 
 import { SingIn } from './src/screens/SingIn';
 
+import { AuthProvider } from './src/hooks/auth';
+
 export default function App() {
   const [fontsLoaded] = useFonts({
     Poppins_400Regular,
@@ -43,8 +45,10 @@ export default function App() {
           translucent={true}
           backgroundColor="transparent"
           barStyle="light-content"
-        />   
-        <SingIn/>
+        />
+        <AuthProvider>   
+          <SingIn/>
+        </AuthProvider>
       </NavigationContainer>
     </ThemeProvider>
   );
