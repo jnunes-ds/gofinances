@@ -2,7 +2,6 @@ import React from 'react';
 import { RectButtonProps } from 'react-native-gesture-handler'
 import { SvgProps } from 'react-native-svg';
 import {
-    Container,
     Button,
     ImageContainer,
     Title,
@@ -19,16 +18,16 @@ export function SingInSocialButton({
     ...rest
 } : Props){
     return (
-        <Container>
-            <Button>
-                <ImageContainer>
-                    <Svg />
-                </ImageContainer>
+        <Button
+        {...rest}
+        >
+            <ImageContainer>
+                <Svg />
+            </ImageContainer>
 
-                <Title>
-                    {title}
-                </Title>
-            </Button>
-        </Container>
+            <Title>
+                {title}
+            </Title>
+        </Button>
     );
 }

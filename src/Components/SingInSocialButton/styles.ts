@@ -3,9 +3,6 @@ import { RectButton } from 'react-native-gesture-handler';
 import { TouchableWithoutFeedback } from 'react-native';
 import { RFValue } from 'react-native-responsive-fontsize';
 
-
-export const Container = styled(TouchableWithoutFeedback)``;
-
 export const Button = styled(RectButton)`
     height: ${RFValue(56)}px;
 
