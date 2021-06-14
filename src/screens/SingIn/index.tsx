@@ -21,7 +21,11 @@ import{
 } from './styles';
 
 export function SingIn(){
-    const { user, singInWithGoogle } = useAuth();
+    const {
+        user,
+        singInWithGoogle,
+        singInWithApple
+    } = useAuth();
     
     async function handleSignInWithGoogle(){
         try{
@@ -29,6 +33,15 @@ export function SingIn(){
         }catch(error){
             console.log(error);
             Alert.alert('Não foi possívelconectar com a conta Google!')
+        }
+    }
+
+    async function handleSingInWithApple(){
+        try {
+            await singInWithApple();
+        } catch (error) {
+            console.log(error);
+            Alert.alert('Não foi possível conectar a conta Apple')
         }
     }
 
@@ -62,6 +75,7 @@ export function SingIn(){
                     <SingInSocialButton 
                         title="Entrar com Apple"
                         svg={AppleSvg}
+                        onPress={handleSingInWithApple}
                     />
                 </FooterWrapper>
 
