@@ -5,12 +5,13 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { useFocusEffect } from '@react-navigation/native';
 import { useTheme } from 'styled-components'; 
+import { useAuth } from '../../hooks/auth';
 
 
 import { 
     HighlightCard,
     TransactionCard, 
-    TransactionCardProps 
+    TransactionProps 
 } from '../../Components/Cards';
 
 import { 
@@ -30,7 +31,7 @@ import {
     TransactionList,
     LoadContainer
  } from './styles';
-export interface DataListProps extends TransactionCardProps{
+export interface DataListProps extends TransactionProps{
     id: string;
 }
 
@@ -51,6 +52,7 @@ export function Dashboard(){
     const dataKey = '@gofinance:transactions';
 
     const theme = useTheme();
+    const { singOut } = useAuth();
     
     async function loadTransactions(){
         const response = await AsyncStorage.getItem(dataKey);
@@ -199,7 +201,7 @@ export function Dashboard(){
                             </User>
                         </UserInfo>
 
-                        <LogoutButton onPress={() => {}}>
+                        <LogoutButton onPress={singOut}>
                             <Icon name="power"/>
                         </LogoutButton>
                     </UserWrapper>

@@ -1,10 +1,10 @@
 import { HighlightCard } from './HighlightCard';
 import { HistoryCard } from './HistoryCard';
-import { TransactionCard, TransactionCardProps } from './TransactionCard';
+import { TransactionCard, TransactionProps } from './TransactionCard';
 
 export {
     HighlightCard,
     HistoryCard,
     TransactionCard,
-    TransactionCardProps
+    TransactionProps
 };

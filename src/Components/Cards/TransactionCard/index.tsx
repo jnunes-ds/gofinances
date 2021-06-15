@@ -25,11 +25,8 @@ import {
     date: string;
  }
 
- interface TransactionCardProps extends TransactionProps{
-     category: CategoryProps;
- }
  interface Props {
-     data: TransactionCardProps;
+     data: TransactionProps;
  }
 
 export function TransactionCard({ data }: Props){
