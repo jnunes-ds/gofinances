@@ -9,7 +9,6 @@ import AppLoading from 'expo-app-loading';
 import 'react-native-gesture-handler';
 import 'intl';
 import 'intl/locale-data/jsonp/pt-BR'
-import { NavigationContainer } from '@react-navigation/native';
 
 import {
   useFonts,
@@ -21,7 +20,7 @@ import {
 import theme from './src/global/styles/theme';
 import { Routes } from './src/routes';
 
-import { AuthProvider } from './src/hooks/auth';
+import { AuthProvider, useAuth } from './src/hooks/auth';
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -30,7 +29,9 @@ export default function App() {
     Poppins_700Bold
   });
 
-  if(!fontsLoaded){
+  const { userStorageLoading } = useAuth();
+
+  if(!fontsLoaded || userStorageLoading){
     return <AppLoading />
   }
 

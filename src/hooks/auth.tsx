@@ -27,6 +27,7 @@ interface IAuthContextData{
     singInWithGoogle(): Promise<void>;
     singInWithApple(): Promise<void>;
     singOut(): Promise<void>;
+    userStorageLoading: boolean;
 }
 
 const AuthContext = createContext({} as IAuthContextData);
@@ -110,7 +111,8 @@ function AuthProvider({ children } : AuthProviderProps){
             user,
             singInWithGoogle,
             singInWithApple,
-            singOut
+            singOut,
+            userStorageLoading
         }}>   
             {children}
         </AuthContext.Provider>
