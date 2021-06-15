@@ -38,7 +38,6 @@ export function SingIn(){
         }catch(error){
             console.log(error);
             Alert.alert('Não foi possívelconectar com a conta Google!')
-        }finally{
             setIsLoading(false);
         }
     }
@@ -50,7 +49,6 @@ export function SingIn(){
         } catch (error) {
             console.log(error);
             Alert.alert('Não foi possível conectar a conta Apple')
-        }finally{
             setIsLoading(false);
         }
     }

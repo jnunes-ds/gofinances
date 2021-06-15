@@ -52,7 +52,7 @@ export function Dashboard(){
     const dataKey = '@gofinance:transactions';
 
     const theme = useTheme();
-    const { singOut } = useAuth();
+    const { singOut, user } = useAuth();
     
     async function loadTransactions(){
         const response = await AsyncStorage.getItem(dataKey);
@@ -193,11 +193,11 @@ export function Dashboard(){
                 <Header>
                     <UserWrapper>
                         <UserInfo>
-                            <Photo source={{ uri: 'https://avatars.githubusercontent.com/u/68449430?v=4' }}/>
+                            <Photo source={{ uri: `${user.photo}` }}/>
                             
                             <User>
                                 <UserGreeting>Olá, </UserGreeting>
-                                <UserName>Júnior</UserName>
+                                <UserName> { user.name } </UserName>
                             </User>
                         </UserInfo>
 
