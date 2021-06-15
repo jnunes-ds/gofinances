@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Alert, ActivityIndicator } from 'react-native';
+import { Alert, ActivityIndicator, Platform } from 'react-native';
 
 import { useTheme } from 'styled-components';
 
@@ -80,11 +80,14 @@ export function SingIn(){
                         svg={GoogleSvg}
                         onPress={handleSignInWithGoogle}
                     />
-                    <SingInSocialButton 
-                        title="Entrar com Apple"
-                        svg={AppleSvg}
-                        onPress={handleSingInWithApple}
-                    />
+                    {
+                        (Platform.OS === 'ios') &&
+                        <SingInSocialButton 
+                            title="Entrar com Apple"
+                            svg={AppleSvg}
+                            onPress={handleSingInWithApple}
+                        />
+                    }
                 </FooterWrapper>
                 { 
                     isLoading && 

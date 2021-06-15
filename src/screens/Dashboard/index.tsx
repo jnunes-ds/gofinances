@@ -49,10 +49,11 @@ export function Dashboard(){
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const [transactions, setTransactions] = useState<DataListProps[]>([]); 
     const [highlightData, setHighlightData] = useState<HighlightData>({} as HighlightData);
-    const dataKey = '@gofinance:transactions';
-
+    
     const theme = useTheme();
     const { singOut, user } = useAuth();
+    
+    const dataKey = `@gofinance:transactions_user:${user.id}`;
     
     async function loadTransactions(){
         const response = await AsyncStorage.getItem(dataKey);
@@ -63,9 +64,15 @@ export function Dashboard(){
             collection : DataListProps[], 
             type : 'positive' | 'negative'
         ) => {
+            const collectionFiltered = collection
+                .filter((transaction) => transaction.type === type)
+
+                if(collectionFiltered.length === 0){
+                    return 0;
+                }
+
             const lastTransactions = Math.max.apply(
-                Math, collection
-                    .filter((transaction) => transaction.type === type)
+                Math, collectionFiltered
                     .map((transaction) => new Date(transaction.date).getTime())
             );
 
@@ -121,10 +128,10 @@ export function Dashboard(){
             const lastTransactionExpensive = getLastTransactionDate(transactions, 'negative');
             const lastTransactionTotal = (lastTransactionEntries >= lastTransactionExpensive)
                 ? lastTransactionEntries : lastTransactionExpensive;
-
-
+            
+                
             const total = entresTotal - expensiveTotal;
-
+                
             setHighlightData({
                 entries: {
                     amount: entresTotal
@@ -132,7 +139,9 @@ export function Dashboard(){
                         style: 'currency',
                         currency: 'BRL'
                     }),
-                    LastTransaction: `Última entrada dia ${lastTransactionEntries}`
+                    LastTransaction: lastTransactionEntries === 0
+                    ? "Não há entradas"
+                    : `Última entrada dia ${lastTransactionEntries}`
                 },
                 expensives: {
                     amount: expensiveTotal
@@ -140,7 +149,9 @@ export function Dashboard(){
                         style: 'currency',
                         currency: 'BRL'
                     }),
-                    LastTransaction: `Última saída dia ${lastTransactionExpensive}`
+                    LastTransaction: lastTransactionExpensive === 0
+                    ? "Não há saídas"
+                    : `Última saída dia ${lastTransactionExpensive}`
                 },
                 total: {
                     amount: total
@@ -148,7 +159,9 @@ export function Dashboard(){
                         style: 'currency',
                         currency: 'BRL'
                     }),
-                    LastTransaction: `Última operação dia ${lastTransactionTotal}`
+                    LastTransaction: (lastTransactionEntries || lastTransactionExpensive) === 0
+                        ? "Não há transações"
+                        : `Última operação dia ${lastTransactionTotal}`
                 }
             });
 

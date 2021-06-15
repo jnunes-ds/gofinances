@@ -26,6 +26,7 @@ import {
 import { categories } from '../../utils/categories';
 import { useFocusEffect } from '@react-navigation/native';
 import { TransactionProps } from '../../Components/Cards/TransactionCard/index';
+import { useAuth } from '../../hooks/auth';
 
 interface TransactionData extends TransactionProps{
     category: string;
@@ -48,6 +49,7 @@ export function Resume(){
     const [totalByCategories, setTotalByCategories] = useState<CategoryData[]>([] as CategoryData[]);
 
     const theme = useTheme();
+    const { user } = useAuth();
 
     function handleDateChange(action : 'next' | 'prev'){
         if(action === 'next'){
@@ -62,7 +64,7 @@ export function Resume(){
     async function loadData() {
         setIsLoading(true); 
 
-        const dataKey = '@gofinance:transactions';
+        const dataKey = `@gofinance:transactions_user:${user.id}`;
         const response = await AsyncStorage.getItem(dataKey);
         const responseFormatted = response ? JSON.parse(response!) : [];
 
