@@ -19,9 +19,7 @@ import {
 } from '@expo-google-fonts/poppins'
 
 import theme from './src/global/styles/theme';
-import { AppRoutes } from './src/routes/app.routes';
-
-import { SingIn } from './src/screens/SingIn';
+import { Routes } from './src/routes';
 
 import { AuthProvider } from './src/hooks/auth';
 
@@ -38,7 +36,6 @@ export default function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <NavigationContainer>
         <StatusBar
           animated={true}
           showHideTransition="fade"  
@@ -46,10 +43,9 @@ export default function App() {
           backgroundColor="transparent"
           barStyle="light-content"
         />
-        <AuthProvider>   
-          <SingIn/>
+        <AuthProvider>
+          <Routes />
         </AuthProvider>
-      </NavigationContainer>
     </ThemeProvider>
   );
 }

@@ -47,6 +47,7 @@ function AuthProvider({ children } : AuthProviderProps){
                     name: result.user.name!,
                     photo: result.user.photoUrl!
                 };
+                setUser(userLogged);
                 await AsyncStorage.setItem('@gofinances:user', JSON.stringify(userLogged))
             }
         }catch(error: any){
