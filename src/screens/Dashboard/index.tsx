@@ -31,6 +31,7 @@ import {
     TransactionList,
     LoadContainer
  } from './styles';
+import id from 'date-fns/esm/locale/id/index.js';
 export interface DataListProps extends TransactionProps{
     id: string;
 }
@@ -85,6 +86,22 @@ export function Dashboard(){
             return DATE;
         }
 
+        const getLastTransactionTotal = (
+            lastDate1 : string | number, 
+            lastDate2 : string | number
+        ) => {
+            let lastDateTotal;
+            if(lastDate1 === 0 && lastDate2 === 0){
+                lastDateTotal = 0;
+            }else if(lastDate1 === 0 || lastDate2 === 0){
+                lastDateTotal = lastDate1 === 0
+                    ? lastDate2 : lastDate1
+            }else{
+                lastDateTotal = lastDate1 >= lastDate2
+                    ? lastDate1 : lastDate2 
+            }
+            return lastDateTotal;
+        }
 
         let entresTotal = 0;
         let expensiveTotal = 0;
@@ -126,10 +143,10 @@ export function Dashboard(){
 
             const lastTransactionEntries = getLastTransactionDate(transactions, 'positive');
             const lastTransactionExpensive = getLastTransactionDate(transactions, 'negative');
-            const lastTransactionTotal = (lastTransactionEntries >= lastTransactionExpensive)
-                ? lastTransactionEntries : lastTransactionExpensive;
             
-                
+            const lastTransactionTotal = getLastTransactionTotal(lastTransactionEntries, lastTransactionExpensive);
+
+
             const total = entresTotal - expensiveTotal;
                 
             setHighlightData({
@@ -159,7 +176,7 @@ export function Dashboard(){
                         style: 'currency',
                         currency: 'BRL'
                     }),
-                    LastTransaction: (lastTransactionEntries || lastTransactionExpensive) === 0
+                    LastTransaction: (lastTransactionTotal === 0)
                         ? "Não há transações"
                         : `Última operação dia ${lastTransactionTotal}`
                 }
