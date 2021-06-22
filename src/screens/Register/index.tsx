@@ -73,7 +73,6 @@ export function Register(){
     } = useForm({
         resolver: yupResolver(schema)
     });
-
     
     function handleTransactionTypeSelect(type: 'positive' | 'negative'){
         setTransactionType(type);

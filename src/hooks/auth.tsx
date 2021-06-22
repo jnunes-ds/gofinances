@@ -31,7 +31,7 @@ interface IAuthContextData{
 }
 
 const AuthContext = createContext({} as IAuthContextData);
-
+    
 function AuthProvider({ children } : AuthProviderProps){
     const [user, setUser] = useState<IUser>({} as IUser);
     const [userStorageLoading, seUserStorageLoading] = useState(true);
