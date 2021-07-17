@@ -2,6 +2,14 @@
 
 It's a cross-platform mobile application biult with react-native.
 
+## About
+
+<b>Go Finances</b> it's a cross-platform mobile app built with react-native to provide the user with a practical way to control spending.
+
+    Below, a gif that shows the app working:
+
+<img src="./src/assets/readme/default.gif">
+
 ## Installation
 
 First you need to download this repository (or make a clone).
@@ -13,10 +21,16 @@ or
 
 > npm install
 
-## About
+## Running Application
 
-<b>Go Finances</b> it's a cross-platform mobile app built with react-native to provide the user with a practical way to control spending.
+To run this application, open two windows of your terminal on the project root and execute:
 
-    Below, a gif that shows the app working:
+In the first window
 
-<img src="./src/assets/readme/default.gif">
+> yarn server
+
+In the second window
+
+> expo start
+
+The first command will turn on the json-server which simulates an api, the second will run the application itself.
