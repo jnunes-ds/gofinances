@@ -23,14 +23,6 @@ or
 
 ## Running Application
 
-To run this application, open two windows of your terminal on the project root and execute:
-
-In the first window
-
-> yarn server
-
-In the second window
+To run this application, open a terminal window on the project root and execute:
 
 > expo start
-
-The first command will turn on the json-server which simulates an api, the second will run the application itself.
