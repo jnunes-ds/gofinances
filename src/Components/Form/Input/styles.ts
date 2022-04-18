@@ -20,7 +20,7 @@ export const Container = styled(TextInput)<ContainerProps>`
 	margin-bottom: 8px;
 
 	${({ active, theme }) => active && css`
-		border-width: 3px;
 		border-color: ${theme.colors.attention};
+		border-width: 3px;
 	`};
 `;
