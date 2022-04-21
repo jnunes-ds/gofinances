@@ -40,11 +40,14 @@ function AuthProvider({ children } : AuthProviderProps){
 
     async function singInWithGoogle(){
         try {
+            console.log('CONSOLE LOG ANTES DO RESULT');
             const result = await Google.logInAsync({
                 iosClientId: '1057683706020-3i7hu719j0ivps93u60qrgt9uddim77b.apps.googleusercontent.com',
                 androidClientId: '1057683706020-7s62n190ohu12o8ughnmmtvl4e5lrtu0.apps.googleusercontent.com',
                 scopes: ['profile', 'email'],
-            })
+            });
+
+            console.log('RESULTADO DA AUTENTICAÇÃO =>', result);
 
             if(result.type === 'success'){
                 const userLogged = {
@@ -57,6 +60,7 @@ function AuthProvider({ children } : AuthProviderProps){
                 await AsyncStorage.setItem(userStorageKey, JSON.stringify(userLogged))
             }
         }catch(error: any){
+            console.log(error);
             throw new Error(error);
         }
     }

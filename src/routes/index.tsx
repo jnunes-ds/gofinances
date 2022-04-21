@@ -6,7 +6,6 @@ import { AppRoutes } from './app.routes';
 import { AuthRoutes } from './auth.routes';
 
 import { useAuth } from '../hooks/auth';
-0
 
 export function Routes(){
     const { user } = useAuth();
