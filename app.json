@@ -11,6 +11,15 @@
     "name": "gofinances",
     "slug": "gofinances",
     "version": "1.0.0",
-    "assetBundlePatterns": ["**/*"]
+    "assetBundlePatterns": ["**/*"],
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "image": "./assets/adaptive-icon.png",
+        "backgroundColor": "#5636D3"
+      }
+    }
   }
 }
